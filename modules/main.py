@@ -15,12 +15,32 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 # External modules
+from modules.module_data_path import data_path, plot_data_path
+from modules.module_data_cleaning import nans_elimination
 
-stage = [1]
+# Number of stages to execute (1 to 5)
+stage = [1]  # Change this list to execute different stages
 
+print("\nExecuting Stage", stage[0])
+
+#Stage 1: Data Loading and Preprocessing
 def stage1():
-    print("Executing Stage 1")
-    # Add stage 1 specific logic here
+    # Get data path
+    data_folder = data_path()
+
+    #Dataset name
+    data_name = "Buzzard_DC1" # Change this to the desired dataset name without extension (e.g., "Buzzard_DC1" for "Buzzard_DC1.csv")
+
+    # Load dataset
+    dataset = os.path.join(data_folder, data_name + ".csv")
+    df = pd.read_csv(dataset)
+    print(df.head())
+
+    # Data Cleaning
+
+    # Preview (optional)
+    #print("\nImported dataset preview:")
+    #print(df_cleaned.head())
 
 def stage2():
     print("Executing Stage 2")
@@ -33,7 +53,7 @@ def stage3():
 def stage4():
     print("Executing Stage 4")
     # Add stage 4 specific logic here
-    
+
 def stage5():
     print("Executing Stage 5")
     # Add stage 5 specific logic here
