@@ -17,6 +17,7 @@ if ROOT not in sys.path:
 # External modules
 from modules.module_data_path import data_path, plot_data_path
 from modules.module_data_cleaning import nans_elimination
+from modules.module_utils import add_color_magnitude_indices, label_star, star_counts, save_dataframe, save_list_to_file, load_list_from_file
 
 # Number of stages to execute (1 to 5)
 stage = [1]  # Change this list to execute different stages
@@ -34,9 +35,12 @@ def stage1():
     # Load dataset
     dataset = os.path.join(data_folder, data_name + ".csv")
     df = pd.read_csv(dataset)
-    print(df.head())
 
     # Data Cleaning
+    df_cleaned = nans_elimination(df)
+
+    # Save the imported DataFrame as CSV in /data
+    save_dataframe(df_cleaned, data_folder, filename= data_name + "_cleaned.csv")
 
     # Preview (optional)
     #print("\nImported dataset preview:")
