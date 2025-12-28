@@ -4,10 +4,6 @@
 
 # Standard
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-import scipy
 import os, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,6 +50,10 @@ def stage1():
     target_column = 'log.mass'  # Change this to the actual target column name if different
     df_cleaned = reorder_and_rename_target(df_cleaned, old_col_name = target_column, new_col_name= "target")
 
+    # Remove some columns if necessary (optional)
+    #columns_to_remove = ['u.err', 'g.err', 'r.err', 'i.err', 'z.err', 'y.err']
+    #df_cleaned = df_cleaned.drop(columns=columns_to_remove, errors='ignore')
+
     # Save the imported DataFrame as CSV in /data
     save_dataframe(df_cleaned, data_folder, filename= data_name + "_cleaned.csv")
 
@@ -61,10 +61,13 @@ def stage1():
     print("\nImported dataset preview:")
     print(df_cleaned.head())
 
+# STAGE 2: Feature Engineering & Labeling
 def stage2():
     """
     Main script for feature engineering and labeling.
         1) Load cleaned data.
+        2) Generate EDA plots (scatter plots, boxplots, correlation heatmap).
+        3) Save plots to /plots folder.
     """
     # Get data path
     data_folder = data_path()
@@ -127,6 +130,7 @@ def stage3():
     save_list_to_file(topK_rfe, data_folder, filename="topK_features_rfe.pkl")
     save_list_to_file(topK_rf, data_folder, filename="topK_features_rf.pkl")
 
+# STAGE 4: Model Comparison & Selection
 def stage4():
     """
     Main script for model comparison and selection.
@@ -149,7 +153,7 @@ def stage4():
 
     # Select models to compare 
     # Available models: "LinearRegression", "Ridge", "Lasso", "RandomForestRegressor", "KNNRegressor", "SVR", "DecisionTreeRegressor"
-    models = ["LinearRegression", "Ridge", "Lasso"]
+    models = ["LinearRegression", "Ridge", "Lasso", "RandomForestRegressor"]
 
     # Compare in validation
     best_model = compare_in_validation(import_models(models), X_train, y_train, X_val, y_val, show_detailed_report=True)
