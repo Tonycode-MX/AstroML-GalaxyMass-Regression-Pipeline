@@ -1,11 +1,10 @@
 # AstroML-GalaxyMass-Regression-Pipeline
 
-
-This project was developed for Partial 2 of the Deep Learning course as part of my academic exchange at the Universidad Católica de Colombia (Bogotá, Colombia). ...
+This project was developed for Partial 2 of the course as part of my academic exchange at the Universidad Católica de Colombia (Bogotá, Colombia). It aims to automate the estimation of galaxy stellar mass (log.mass) using simulated photometric data from the Rubin Observatory (LSST).The goal is to build an end-to-end supervised ML regression pipeline for mass estimation: acquire and preprocess photometric magnitudes (`u, g, r, i, z, y`), their uncertainties, and redshift; perform feature selection using Random Forest importance and Recursive Feature Elimination (RFE); and train four regression models (Simple Linear Regression, Ridge, Lasso, and Random Forest Regressor). The pipeline evaluates models using $R^2$, MAE, and RMSE metrics, identifying the Random Forest Regressor (with $R^2 > 96\%$) as the optimal model for scalable predictions.
 
 **Note on Methodology:**
 
-Description
+While traditional spectral analysis offers high precision for mass estimation, it is often computationally expensive for the massive volume of data expected from next-generation surveys like LSST. This project deliberately employs supervised machine learning regression as a scalable and efficient alternative. The primary goal was to demonstrate proficiency in building an end-to-end ML pipeline—covering data cleaning, feature optimization, and model validation—applied to a dataset of personal interest.
 
 ### Models Used
 
